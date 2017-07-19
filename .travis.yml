@@ -3,15 +3,14 @@ matrix:
   include:
   - os: linux
     env: TARGET=cpp-gcc
-  include:
+
   - os: linux
     php: php7.1
     env: TARGET=PHP7.0
-  include:
+
   - os: linux
     php: php7.1
     env: TARGET=PHP7.`
-
 addons:
   apt:
     sources:
