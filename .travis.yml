@@ -26,10 +26,7 @@ env:
     - DOC_BRANCH=master
     - LIB_LOW_LEVEL_API=ON
     # COVERITY_SCAN_TOKEN
-    - secure: >
-      GjN2rHGtPPXTMwWUzpB9ULqDrFXmShysGtQ8VIXYJULUUHZ26entYWuwTb8q3NI8
-      syVeDFyCmam7PSnRgc/nuaOBh8/2lO+dAB1H54jfvbREBBYC2yIIZAT1z/oQ/ZYW
-      dJBrWsNw+pPYk8lY1Z52ggLu2Gd4fktrzuISch7CuCY=
+    - secure: "GjN2rHGtPPXTMwWUzpB9ULqDrFXmShysGtQ8VIXYJULUUHZ26entYWuwTb8q3NI8syVeDFyCmam7PSnRgc/nuaOBh8/2lO+dAB1H54jfvbREBBYC2yIIZAT1z/oQ/ZYWdJBrWsNw+pPYk8lY1Z52ggLu2Gd4fktrzuISch7CuCY="
 
 addons:
   apt:
@@ -52,8 +49,10 @@ script:
   - echo ${TARGET}
   - php --version || echo "No php"
   - phpunit --version || echo "No phpunit"
+  - php -r "\$ops=get_defined_constants(); var_dump(\$ops['PHP_ZTS']);" || echo "No php"
   - ${CC} --version || echo "No CC"
   - ${CXX} --version || echo "No CXX"
+  -
 after_success:
   - echo After success
 dist: trusty
