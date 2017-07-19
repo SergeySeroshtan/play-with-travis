@@ -7,12 +7,31 @@ matrix:
     env: TARGET=cpp-gcc
 
   - os: linux
+    env: TARGET=cpp-clang
+
+  - os: linux
+    php: 7.0
+    env: TARGET=PHP7.0
+
+  - os: linux
     php: 7.0
     env: TARGET=PHP7.0
 
   - os: linux
     php: 7.1
     env: TARGET=PHP7.1
+
+env:
+  global:
+    - BUILD_DIR_NAME=build
+    - DOC_BRANCH=master
+    - LIB_LOW_LEVEL_API=ON
+    # COVERITY_SCAN_TOKEN
+    - secure: "GjN2rHGtPPXTMwWUzpB9ULqDrFXmShysGtQ8VIXYJULUUHZ26entYWuwTb8q3NI8syVeDFyCmam7PSnRgc/nuaOBh8/2lO+dAB1H54jfvbREBBYC2yIIZAT1z/oQ/ZYWdJBrWsNw+pPYk8lY1Z52ggLu2Gd4fktrzuISch7CuCY="
+  matrix:
+    - CC=gcc-5 CXX=g++-5
+    - CC=clang-3.6 CXX=clang++-3.6
+
 addons:
   apt:
     sources:
@@ -31,10 +50,10 @@ before_script:
   - echo Before script
 script:
   - echo Script
-  - php --version || echo "No php"
-  - gcc --version || echo "No gcc"
-  - clang --version || echo "No clang"
   - echo ${TARGET}
+  - php --version || echo "No php"
+  - ${CC} --version || echo "No CC"
+  - ${CXX} --version || echo "No CXX"
 after_success:
   - echo After success
 dist: trusty
