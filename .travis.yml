@@ -48,6 +48,7 @@ script:
   - echo Script
   - echo ${TARGET}
   - php --version || echo "No php"
+  - phpunit --version || echo "No phpunit"
   - ${CC} --version || echo "No CC"
   - ${CXX} --version || echo "No CXX"
 after_success:
