@@ -1,16 +1,18 @@
 language: php
+
+
 matrix:
   include:
   - os: linux
     env: TARGET=cpp-gcc
 
   - os: linux
-    php: php7.1
+    php: 7.0
     env: TARGET=PHP7.0
 
   - os: linux
-    php: php7.1
-    env: TARGET=PHP7.`
+    php: 7.1
+    env: TARGET=PHP7.1
 addons:
   apt:
     sources:
