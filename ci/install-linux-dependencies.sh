@@ -113,7 +113,7 @@ if [[ "${LANG}" == "php" ]]; then
     fi
     ######################################## PHP
     echo "Build & Install PHP ..."
-    LC_ALL=C.UTF-8 travis_retry sudo apt-add-repository ppa:ondrej/php
+    travis_retry sudo apt-add-repository -y ppa:ondrej/php
     travis_retry sudo apt-get -qq update
     travis_retry sudo apt-get install -y -qq php${PHP_VERSION}
     travis_retry sudo apt-get install -y -qq php${PHP_VERSION}-dev
