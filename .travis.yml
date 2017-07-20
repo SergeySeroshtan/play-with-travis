@@ -40,10 +40,10 @@ env:
 before_install:
   - date -u
   - uname -a
-  - if [ "${TRAVIS_OS_NAME}" = "linux" ]; then lscpu; fi
+  - if [[ "${TRAVIS_OS_NAME}" == "linux" ]]; then lscpu; fi
 install:
-  - bash ./ci/install-credentials.sh
-  - if [ "${TRAVIS_OS_NAME}" = "linux" ]; then bash ./ci/install-linux-dependencies.sh; fi
+  - source ./ci/install-credentials.sh
+  - if [[ "${TRAVIS_OS_NAME}" == "linux" ]]; then source ./ci/install-linux-dependencies.sh; fi
   - ${CC} --version
   - ${CXX} --version
 before_script: ./ci/configure.sh

@@ -35,7 +35,7 @@
 # POSSIBILITY OF SUCH DAMAGE.
 #
 
-set -ev
+set -e
 
 ######################################## Inspect dependencies
 cmake --version
@@ -68,3 +68,5 @@ fi
 # cd "${BUILD_DIR_NAME}"
 
 # cmake ${CMAKE_ARGS} ..
+
+set +e

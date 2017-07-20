@@ -35,7 +35,7 @@
 # POSSIBILITY OF SUCH DAMAGE.
 #
 
-set -ev
+set -e
 
 echo Publishing documentation...
 exit 0
@@ -126,3 +126,5 @@ git config user.email "${COMMIT_EMAIL}"
 git commit -m "Automated documentation build for changeset ${CHANGESET}."
 git push origin gh-pages
 cd -
+
+set +e

@@ -35,7 +35,7 @@
 # POSSIBILITY OF SUCH DAMAGE.
 #
 
-set -ev
+set -e
 
 echo Installing credentials...
 exit 0
@@ -46,3 +46,5 @@ if [ "${PUBLISH_DOCS}" == "ON" ]; then
     chmod 0600 "${TRAVIS_BUILD_DIR}/ci/travis_ci_rsa"
     cp "${TRAVIS_BUILD_DIR}/ci/travis_ci_rsa" "$HOME/.ssh/id_rsa"
 fi
+
+set +e

@@ -108,3 +108,5 @@ if [[ "${LANG}" == "php" ]]; then
     chmod +x phpunit-${PHPUNIT_VERSION}.phar
     sudo mv phpunit-${PHPUNIT_VERSION}.phar /usr/bin/phpunit
 fi
+
+set +e
