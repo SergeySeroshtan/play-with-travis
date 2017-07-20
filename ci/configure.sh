@@ -54,7 +54,7 @@ CMAKE_ARGS+=" -DCMAKE_INSTALL_PREFIX=${TRAVIS_BUILD_DIR}/install"
 if [ "${LANG}" = "cpp" ]; then
     CMAKE_ARGS+=" -DLIB_FILE_IO=ON"
 fi
-if [ -ne "${LANG_VERSION}" -]; then
+if [ -ne "${LANG_VERSION}" ]; then
     CMAKE_ARGS+=" -DLANG_VERSION=${LANG_VERSION}"
 fi
 

@@ -49,8 +49,8 @@ before_install:
   - uname -a
   - if [[ "${TRAVIS_OS_NAME}" == "linux" ]]; then lscpu; fi
 install:
-  - if [[ "${TRAVIS_OS_NAME}" == "linux" ]]; then source ./ci/install-linux-dependencies.sh; fi
-  - source ./ci/install-credentials.sh
+  - cd "${TRAVIS_BUILD_DIR}"; if [[ "${TRAVIS_OS_NAME}" == "linux" ]]; then source ./ci/install-linux-dependencies.sh; fi
+  - cd "${TRAVIS_BUILD_DIR}"; source ./ci/install-credentials.sh
   - ${CC} --version
   - ${CXX} --version
 before_script: ./ci/configure.sh
