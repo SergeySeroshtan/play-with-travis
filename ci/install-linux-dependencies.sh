@@ -47,13 +47,16 @@ LANG_VERSION_PATCH=$(echo ${LANG_VERSION} | cut -d. -f3)
 ######################################## Update lists of packages
 travis_retry sudo apt-get -qq update
 
+######################################## Utils
+travis_retry sudo apt-get install -y -qq software-properties-common
+
 ######################################## Compilers
 if [[ "${CC}" == "gcc-5" ]]; then
-    travis_retry sudo add-apt-repository -y ppa:ubuntu-toolchain-r/test
+    travis_retry sudo apt-add-repository -y ppa:ubuntu-toolchain-r/test
     travis_retry sudo apt-get -qq update
     travis_retry sudo apt-get install -y -qq gcc-5 g++-5
 elif [[ "${CC}" == "gcc-6" ]]; then
-    travis_retry sudo add-apt-repository -y ppa:ubuntu-toolchain-r/test
+    travis_retry sudo apt-add-repository -y ppa:ubuntu-toolchain-r/test
     travis_retry sudo apt-get -qq update
     travis_retry sudo apt-get install -y -qq gcc-6 g++-6
 elif [[ "${CC}" == "clang-3.6" ]]; then
@@ -110,7 +113,7 @@ if [[ "${LANG}" == "php" ]]; then
     fi
     ######################################## PHP
     echo "Build & Install PHP ..."
-    travis_retry sudo add-apt-repository ppa:ondrej/php
+    LC_ALL=C.UTF-8 travis_retry sudo apt-add-repository ppa:ondrej/php
     travis_retry sudo apt-get -qq update
     travis_retry sudo apt-get install -y -qq php${PHP_VERSION}
     travis_retry sudo apt-get install -y -qq php${PHP_VERSION}-dev
