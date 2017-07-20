@@ -71,29 +71,29 @@ CMAKE_VERSION_MAJOR=3
 CMAKE_VERSION_MINOR=9
 CMAKE_VERSION_PATCH=0
 CMAKE_VERSION="${CMAKE_VERSION_MAJOR}.${CMAKE_VERSION_MINOR}.${CMAKE_VERSION_PATCH}"
-travis_retry wget https://cmake.org/files/v${CMAKE_VERSION_MAJOR}.${CMAKE_VERSION_MINOR}/cmake-${CMAKE_VERSION}.tar.gz > /dev/null
-tar xvfz cmake-${CMAKE_VERSION}.tar.gz > /dev/null
-cd cmake-${CMAKE_VERSION} > /dev/null
-./bootstrap > /dev/null
-make -j4 > /dev/null
-sudo make install > /dev/null
+travis_retry wget https://cmake.org/files/v${CMAKE_VERSION_MAJOR}.${CMAKE_VERSION_MINOR}/cmake-${CMAKE_VERSION}.tar.gz
+tar xvfz cmake-${CMAKE_VERSION}.tar.gz
+cd cmake-${CMAKE_VERSION}
+./bootstrap
+make -j4
+sudo make install
 
 ######################################## SWIG
 echo "Build & Install SWIG ..."
 SWIG_VERSION=3.0.12
-travis_retry wget http://downloads.sourceforge.net/swig/swig-${SWIG_VERSION}.tar.gz > /dev/null
-tar -xzf swig-${SWIG_VERSION}.tar.gz > /dev/null
-cd swig-${SWIG_VERSION} > /dev/null
-./configure > /dev/null
-make -j4  > /dev/null
-sudo make install > /dev/null
+travis_retry wget http://downloads.sourceforge.net/swig/swig-${SWIG_VERSION}.tar.gz
+tar -xzf swig-${SWIG_VERSION}.tar.gz
+cd swig-${SWIG_VERSION}
+./configure
+make -j4
+sudo make install
 
 ######################################## Doxygen
 echo "Build & Install Doxygen ..."
 DOXYGEN_VERSION=1.8.13
-travis_retry wget http://ftp.stack.nl/pub/users/dimitri/doxygen-${DOXYGEN_VERSION}.linux.bin.tar.gz > /dev/null
-tar -xzf doxygen-${DOXYGEN_VERSION}.linux.bin.tar.gz > /dev/null
-sudo mv doxygen-${DOXYGEN_VERSION}/bin/doxygen /usr/bin/doxygen > /dev/null
+travis_retry wget http://ftp.stack.nl/pub/users/dimitri/doxygen-${DOXYGEN_VERSION}.linux.bin.tar.gz
+tar -xzf doxygen-${DOXYGEN_VERSION}.linux.bin.tar.gz
+sudo mv doxygen-${DOXYGEN_VERSION}/bin/doxygen /usr/bin/doxygen
 
 ######################################## PHP & PHPUnit
 if [[ "${LANG}" == "php" ]]; then
@@ -115,9 +115,9 @@ if [[ "${LANG}" == "php" ]]; then
 
     ######################################## PHPUnit
     echo "Build & Install PHPUnit ..."
-    travis_retry wget https://phar.phpunit.de/phpunit-${PHPUNIT_VERSION}.phar > /dev/null
-    chmod +x phpunit-${PHPUNIT_VERSION}.phar > /dev/null
-    sudo mv phpunit-${PHPUNIT_VERSION}.phar /usr/bin/phpunit > /dev/null
+    travis_retry wget https://phar.phpunit.de/phpunit-${PHPUNIT_VERSION}.phar
+    chmod +x phpunit-${PHPUNIT_VERSION}.phar
+    sudo mv phpunit-${PHPUNIT_VERSION}.phar /usr/bin/phpunit
 fi
 
 set +e
