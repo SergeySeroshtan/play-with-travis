@@ -65,19 +65,22 @@ elif [[ "${CC}" == "clang-3.6" ]]; then
     travis_retry sudo apt-get install -y -qq clang-3.6 clang++-3.6
 fi
 
+######################################## Build from the sources
+mkdir -p "${TRAVIS_BUILD_DIR}/dependencies" && cd "${TRAVIS_BUILD_DIR}/dependencies"
+
 ######################################## CMake
-echo "Build & Install CMake ..."
-CMAKE_VERSION_MAJOR=3
-CMAKE_VERSION_MINOR=9
-CMAKE_VERSION_PATCH=0
-CMAKE_VERSION="${CMAKE_VERSION_MAJOR}.${CMAKE_VERSION_MINOR}.${CMAKE_VERSION_PATCH}"
-travis_retry wget https://cmake.org/files/v${CMAKE_VERSION_MAJOR}.${CMAKE_VERSION_MINOR}/cmake-${CMAKE_VERSION}.tar.gz
-tar xvfz cmake-${CMAKE_VERSION}.tar.gz
-cd cmake-${CMAKE_VERSION}
-./bootstrap
-make -j4
-sudo make install
-cd -
+# echo "Build & Install CMake ..."
+# CMAKE_VERSION_MAJOR=3
+# CMAKE_VERSION_MINOR=9
+# CMAKE_VERSION_PATCH=0
+# CMAKE_VERSION="${CMAKE_VERSION_MAJOR}.${CMAKE_VERSION_MINOR}.${CMAKE_VERSION_PATCH}"
+# travis_retry wget https://cmake.org/files/v${CMAKE_VERSION_MAJOR}.${CMAKE_VERSION_MINOR}/cmake-${CMAKE_VERSION}.tar.gz
+# tar xvfz cmake-${CMAKE_VERSION}.tar.gz
+# cd cmake-${CMAKE_VERSION}
+# ./bootstrap
+# make -j4
+# sudo make install
+# cd -
 
 ######################################## SWIG
 echo "Build & Install SWIG ..."
@@ -91,36 +94,38 @@ sudo make install
 cd -
 
 ######################################## Doxygen
-echo "Build & Install Doxygen ..."
-DOXYGEN_VERSION=1.8.13
-travis_retry wget http://ftp.stack.nl/pub/users/dimitri/doxygen-${DOXYGEN_VERSION}.linux.bin.tar.gz
-tar -xzf doxygen-${DOXYGEN_VERSION}.linux.bin.tar.gz
-sudo mv doxygen-${DOXYGEN_VERSION}/bin/doxygen /usr/bin/doxygen
-cd -
+# echo "Build & Install Doxygen ..."
+# DOXYGEN_VERSION=1.8.13
+# travis_retry wget http://ftp.stack.nl/pub/users/dimitri/doxygen-${DOXYGEN_VERSION}.linux.bin.tar.gz
+# tar -xzf doxygen-${DOXYGEN_VERSION}.linux.bin.tar.gz
+# sudo mv doxygen-${DOXYGEN_VERSION}/bin/doxygen /usr/bin/doxygen
+# cd -
 
 ######################################## PHP & PHPUnit
-if [[ "${LANG}" == "php" ]]; then
-    PHP_VERSION=${LANG_VERSION_MAJOR}.${LANG_VERSION_MINOR}
-    PHP_VERSION_MAJOR=${LANG_VERSION_MAJOR}
+# if [[ "${LANG}" == "php" ]]; then
+#     PHP_VERSION=${LANG_VERSION_MAJOR}.${LANG_VERSION_MINOR}
+#     PHP_VERSION_MAJOR=${LANG_VERSION_MAJOR}
 
-    if [[ ${PHP_VERSION_MAJOR} -ge 7 ]]; then
-        PHPUNIT_VERSION=6.2
-    else
-        PHPUNIT_VERSION=5.7
-    fi
-    ######################################## PHP
-    echo "Build & Install PHP ..."
-    travis_retry sudo apt-add-repository ppa:ondrej/php
-    travis_retry sudo apt-get -qq update
-    travis_retry sudo apt-get install -y -qq php${PHP_VERSION}
-    travis_retry sudo apt-get install -y -qq php${PHP_VERSION}-dev
-    travis_retry sudo apt-get install -y -qq php${PHP_VERSION}-mbstring
+#     if [[ ${PHP_VERSION_MAJOR} -ge 7 ]]; then
+#         PHPUNIT_VERSION=6.2
+#     else
+#         PHPUNIT_VERSION=5.7
+#     fi
+#     ######################################## PHP
+#     echo "Build & Install PHP ..."
+#     travis_retry sudo apt-add-repository ppa:ondrej/php
+#     travis_retry sudo apt-get -qq update
+#     travis_retry sudo apt-get install -y -qq php${PHP_VERSION}
+#     travis_retry sudo apt-get install -y -qq php${PHP_VERSION}-dev
+#     travis_retry sudo apt-get install -y -qq php${PHP_VERSION}-mbstring
 
-    ######################################## PHPUnit
-    echo "Build & Install PHPUnit ..."
-    travis_retry wget https://phar.phpunit.de/phpunit-${PHPUNIT_VERSION}.phar
-    chmod +x phpunit-${PHPUNIT_VERSION}.phar
-    sudo mv phpunit-${PHPUNIT_VERSION}.phar /usr/bin/phpunit
-fi
+#     ######################################## PHPUnit
+#     echo "Build & Install PHPUnit ..."
+#     travis_retry wget https://phar.phpunit.de/phpunit-${PHPUNIT_VERSION}.phar
+#     chmod +x phpunit-${PHPUNIT_VERSION}.phar
+#     sudo mv phpunit-${PHPUNIT_VERSION}.phar /usr/bin/phpunit
+# fi
+
+cd "${TRAVIS_BUILD_DIR}"
 
 set +e
