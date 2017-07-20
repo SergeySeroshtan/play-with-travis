@@ -42,7 +42,7 @@ before_install:
   - uname -a
   - if [ "${TRAVIS_OS_NAME}" = "linux" ]; then lscpu; fi
 install:
-  - source ./ci/install-credentials
+  - source ./ci/install-credentials.sh
   - if [ "${TRAVIS_OS_NAME}" = "linux" ]; then source ./ci/install-linux-dependencies.sh; fi
   - ${CC} --version
   - ${CXX} --version
