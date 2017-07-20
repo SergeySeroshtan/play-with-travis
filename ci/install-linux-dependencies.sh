@@ -101,30 +101,30 @@ cd -
 # sudo mv doxygen-${DOXYGEN_VERSION}/bin/doxygen /usr/bin/doxygen
 # cd -
 
-######################################## PHP & PHPUnit
-# if [[ "${LANG}" == "php" ]]; then
-#     PHP_VERSION=${LANG_VERSION_MAJOR}.${LANG_VERSION_MINOR}
-#     PHP_VERSION_MAJOR=${LANG_VERSION_MAJOR}
+####################################### PHP & PHPUnit
+if [[ "${LANG}" == "php" ]]; then
+    PHP_VERSION=${LANG_VERSION_MAJOR}.${LANG_VERSION_MINOR}
+    PHP_VERSION_MAJOR=${LANG_VERSION_MAJOR}
 
-#     if [[ ${PHP_VERSION_MAJOR} -ge 7 ]]; then
-#         PHPUNIT_VERSION=6.2
-#     else
-#         PHPUNIT_VERSION=5.7
-#     fi
-#     ######################################## PHP
-#     echo "Build & Install PHP ..."
-#     travis_retry sudo apt-add-repository ppa:ondrej/php
-#     travis_retry sudo apt-get -qq update
-#     travis_retry sudo apt-get install -y -qq php${PHP_VERSION}
-#     travis_retry sudo apt-get install -y -qq php${PHP_VERSION}-dev
-#     travis_retry sudo apt-get install -y -qq php${PHP_VERSION}-mbstring
+    if [[ ${PHP_VERSION_MAJOR} -ge 7 ]]; then
+        PHPUNIT_VERSION=6.2
+    else
+        PHPUNIT_VERSION=5.7
+    fi
+    ######################################## PHP
+    echo "Build & Install PHP ..."
+    travis_retry sudo apt-add-repository ppa:ondrej/php
+    travis_retry sudo apt-get -qq update
+    travis_retry sudo apt-get install -y -qq php${PHP_VERSION}
+    travis_retry sudo apt-get install -y -qq php${PHP_VERSION}-dev
+    travis_retry sudo apt-get install -y -qq php${PHP_VERSION}-mbstring
 
-#     ######################################## PHPUnit
-#     echo "Build & Install PHPUnit ..."
-#     travis_retry wget https://phar.phpunit.de/phpunit-${PHPUNIT_VERSION}.phar
-#     chmod +x phpunit-${PHPUNIT_VERSION}.phar
-#     sudo mv phpunit-${PHPUNIT_VERSION}.phar /usr/bin/phpunit
-# fi
+    ######################################## PHPUnit
+    echo "Build & Install PHPUnit ..."
+    travis_retry wget https://phar.phpunit.de/phpunit-${PHPUNIT_VERSION}.phar
+    chmod +x phpunit-${PHPUNIT_VERSION}.phar
+    sudo mv phpunit-${PHPUNIT_VERSION}.phar /usr/bin/phpunit
+fi
 
 cd "${TRAVIS_BUILD_DIR}"
 
