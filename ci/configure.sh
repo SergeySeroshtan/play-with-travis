@@ -38,14 +38,14 @@
 set -e
 
 ######################################## Inspect dependencies
-cmake --version
-swig -version
-doxygen --version
+# cmake --version
+# swig -version
+# doxygen --version
 
-if [ "${LANG}" = "php" ]; then
-    php --version
-    phpunit --version
-fi
+# if [ "${LANG}" = "php" ]; then
+#     php --version
+#     phpunit --version
+# fi
 
 ######################################## Configure CMake arguments
 CMAKE_ARGS="-DLANG=${LANG} -DPLATFORM_ARCH=`uname -m`"
