@@ -71,20 +71,28 @@ CMAKE_VERSION_MINOR=9
 CMAKE_VERSION_PATCH=0
 CMAKE_VERSION="${CMAKE_VERSION_MAJOR}.${CMAKE_VERSION_MINOR}.${CMAKE_VERSION_PATCH}"
 travis_retry wget https://cmake.org/files/v${CMAKE_VERSION_MAJOR}.${CMAKE_VERSION_MINOR}/cmake-${CMAKE_VERSION}.tar.gz
-tar xvfz cmake-${CMAKE_VERSION}.tar.gz
-cd cmake-${CMAKE_VERSION} && ./bootstrap && make -j4 && sudo make install
+tar xvfz cmake-${CMAKE_VERSION}.tar.gz > /dev/null
+cd cmake-${CMAKE_VERSION} > /dev/null
+./bootstrap > /dev/null
+make -j4 > /dev/null
+sudo make install > /dev/null
 
 ######################################## SWIG
 SWIG_VERSION=3.0.12
-curl -L -O http://downloads.sourceforge.net/swig/swig-${SWIG_VERSION}.tar.gz
-tar -xzf swig-${SWIG_VERSION}.tar.gz
-cd swig-${SWIG_VERSION} && ./configure && make -j4 && sudo make install
+travis_retry wget http://downloads.sourceforge.net/swig/swig-${SWIG_VERSION}.tar.gz
+tar -xzf swig-${SWIG_VERSION}.tar.gz > /dev/null
+cd swig-${SWIG_VERSION}
+./configure > /dev/null
+make -j4  > /dev/null
+sudo make install > /dev/null
 
 ######################################## Doxygen
 DOXYGEN_VERSION=1.8.13
 travis_retry wget http://ftp.stack.nl/pub/users/dimitri/doxygen-${DOXYGEN_VERSION}.linux.bin.tar.gz
 tar -xzf doxygen-${DOXYGEN_VERSION}.linux.bin.tar.gz
-cd doxygen-${DOXYGEN_VERSION} && ./configure && sudo make install
+cd doxygen-${DOXYGEN_VERSION} > /dev/null
+./configure > /dev/null
+sudo make install > /dev/null
 
 ######################################## PHP & PHPUnit
 if [[ "${LANG}" == "php" ]]; then
