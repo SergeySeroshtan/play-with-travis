@@ -1,25 +1,35 @@
-language: php
-
+language: cpp
 matrix:
   include:
-  - os: linux
-    env: LANG=cpp CC=gcc-5 CXX=g++-5
-
-  - os: linux
-    env: LANG=cpp CC=clang-3.6 CXX=clang++-3.6
-
-  - os: linux
-    php: 5.6
-    env: LANG=php LANG_VERSION=5.6 CC=gcc-5 CXX=g++-5
-
-  - os: linux
-    php: 7.0
-    env: LANG=php LANG_VERSION=7.0 CC=gcc-5 CXX=g++-5
-
-  - os: linux
-    php: 7.1
-    env: LANG=php LANG_VERSION=7.1 CC=gcc-5 CXX=g++-5
-
+    - os: linux
+      compiler: gcc
+      env: LANG=cpp CC=gcc CXX=g++
+      sudo: required
+      dist: trusty
+    - os: linux
+      compiler: gcc
+      env: LANG=cpp CC=gcc-5 CXX=g++-5
+      sudo: required
+      dist: trusty
+    - os: linux
+      compiler: gcc
+      env: LANG=cpp CC=gcc-6 CXX=g++-6
+      sudo: required
+      dist: trusty
+    - os: linux
+      compiler: clang
+      env: LANG=cpp CC=clang-3.6 CXX=clang++-3.6
+      sudo: required
+      dist: trusty
+    - os: linux
+      compiler: gcc
+      env: LANG=php LANG_VERSION=5.6
+    - os: linux
+      compiler: gcc
+      env: LANG=php LANG_VERSION=7.0
+    - os: linux
+      compiler: gcc
+      env: LANG=php LANG_VERSION=7.1
 env:
   global:
     - BUILD_DIR_NAME=build
@@ -27,33 +37,16 @@ env:
     - LIB_LOW_LEVEL_API=ON
     # COVERITY_SCAN_TOKEN
     - secure: "GjN2rHGtPPXTMwWUzpB9ULqDrFXmShysGtQ8VIXYJULUUHZ26entYWuwTb8q3NI8syVeDFyCmam7PSnRgc/nuaOBh8/2lO+dAB1H54jfvbREBBYC2yIIZAT1z/oQ/ZYWdJBrWsNw+pPYk8lY1Z52ggLu2Gd4fktrzuISch7CuCY="
-
-addons:
-  apt:
-    sources:
-      - ubuntu-toolchain-r-test
-      - llvm-toolchain-precise-3.6
-    packages:
-      - libcurl4-openssl-dev
-      - g++-5
-      - clang-3.6
-      - graphviz
 before_install:
-  - echo Before install
+  - date -u
+  - uname -a
+  - if [ "${TRAVIS_OS_NAME}" = "linux" ]; then lscpu; fi
 install:
-  - echo Install
-before_script:
-  - echo Before script
-script:
-  - echo Script
-  - echo ${TARGET}
-  - php --version || echo "No php"
-  - phpunit --version || echo "No phpunit"
-  - php -r "\$ops=get_defined_constants(); var_dump(\$ops['PHP_ZTS']);" || echo "No php"
-  - ${CC} --version || echo "No CC"
-  - ${CXX} --version || echo "No CXX"
-  -
+  - source ./ci/install-credentials
+  - if [ "${TRAVIS_OS_NAME}" = "linux" ]; then source ./ci/install-linux-dependencies.sh; fi
+  - ${CC} --version
+  - ${CXX} --version
+before_script: ./ci/configure.sh
+script: ./ci/run.sh
 after_success:
-  - echo After success
-dist: trusty
-sudo: false
+  - source ./ci/publish-docs.sh
