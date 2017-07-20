@@ -29,6 +29,8 @@ matrix:
     - os: linux
       compiler: gcc
       env: LANG=php LANG_VERSION=7.0
+      sudo: required
+      dist: trusty
     - os: linux
       compiler: gcc
       env: LANG=php LANG_VERSION=7.1
@@ -42,12 +44,13 @@ env:
     - BUILD_DIR_NAME=build
     - DOC_BRANCH=master
     - LIB_LOW_LEVEL_API=ON
+    - PROJECT_ROOT=${TRAVIS_BUILD_DIR}
     # COVERITY_SCAN_TOKEN
     - secure: "GjN2rHGtPPXTMwWUzpB9ULqDrFXmShysGtQ8VIXYJULUUHZ26entYWuwTb8q3NI8syVeDFyCmam7PSnRgc/nuaOBh8/2lO+dAB1H54jfvbREBBYC2yIIZAT1z/oQ/ZYWdJBrWsNw+pPYk8lY1Z52ggLu2Gd4fktrzuISch7CuCY="
 before_install:
   - date -u
   - uname -a
-  - locale-gen en_US.UTF-8
+  - sudo locale-gen en_US.UTF-8
   - if [[ "${TRAVIS_OS_NAME}" == "linux" ]]; then lscpu; fi
 install:
   - if [[ "${TRAVIS_OS_NAME}" == "linux" ]]; then source ./ci/install-linux-dependencies.sh; fi

@@ -66,7 +66,7 @@ elif [[ "${CC}" == "clang-3.6" ]]; then
 fi
 
 ######################################## Build from the sources
-mkdir -p "${TRAVIS_BUILD_DIR}/dependencies" && cd "${TRAVIS_BUILD_DIR}/dependencies"
+mkdir -p "${PROJECT_ROOT}/dependencies" && cd "${PROJECT_ROOT}/dependencies"
 
 ######################################## CMake
 # echo "Build & Install CMake ..."
@@ -83,15 +83,15 @@ mkdir -p "${TRAVIS_BUILD_DIR}/dependencies" && cd "${TRAVIS_BUILD_DIR}/dependenc
 # cd -
 
 ######################################## SWIG
-echo "Build & Install SWIG ..."
-SWIG_VERSION=3.0.12
-travis_retry wget http://downloads.sourceforge.net/swig/swig-${SWIG_VERSION}.tar.gz
-tar -xzf swig-${SWIG_VERSION}.tar.gz
-cd swig-${SWIG_VERSION}
-./configure
-make -j4
-sudo make install
-cd -
+# echo "Build & Install SWIG ..."
+# SWIG_VERSION=3.0.12
+# travis_retry wget http://downloads.sourceforge.net/swig/swig-${SWIG_VERSION}.tar.gz
+# tar -xzf swig-${SWIG_VERSION}.tar.gz
+# cd swig-${SWIG_VERSION}
+# ./configure
+# make -j4
+# sudo make install
+# cd -
 
 ######################################## Doxygen
 # echo "Build & Install Doxygen ..."
@@ -126,6 +126,6 @@ if [[ "${LANG}" == "php" ]]; then
     sudo mv phpunit-${PHPUNIT_VERSION}.phar /usr/bin/phpunit
 fi
 
-cd "${TRAVIS_BUILD_DIR}"
+cd "${PROJECT_ROOT}"
 
 set +e
