@@ -38,9 +38,6 @@ matrix:
       dist: trusty
 env:
   global:
-    - LANG=en_US.UTF-8
-    - LANGUAGE=en_US:en
-    - LC_ALL=en_US.UTF-8
     - BUILD_DIR_NAME=build
     - DOC_BRANCH=master
     - LIB_LOW_LEVEL_API=ON
@@ -50,7 +47,6 @@ env:
 before_install:
   - date -u
   - uname -a
-  - sudo locale-gen en_US.UTF-8
   - if [[ "${TRAVIS_OS_NAME}" == "linux" ]]; then lscpu; fi
 install:
   - if [[ "${TRAVIS_OS_NAME}" == "linux" ]]; then source ./ci/install-linux-dependencies.sh; fi
