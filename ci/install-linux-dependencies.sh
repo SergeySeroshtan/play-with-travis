@@ -77,6 +77,7 @@ cd cmake-${CMAKE_VERSION}
 ./bootstrap
 make -j4
 sudo make install
+cd -
 
 ######################################## SWIG
 echo "Build & Install SWIG ..."
@@ -87,6 +88,7 @@ cd swig-${SWIG_VERSION}
 ./configure
 make -j4
 sudo make install
+cd -
 
 ######################################## Doxygen
 echo "Build & Install Doxygen ..."
@@ -94,6 +96,7 @@ DOXYGEN_VERSION=1.8.13
 travis_retry wget http://ftp.stack.nl/pub/users/dimitri/doxygen-${DOXYGEN_VERSION}.linux.bin.tar.gz
 tar -xzf doxygen-${DOXYGEN_VERSION}.linux.bin.tar.gz
 sudo mv doxygen-${DOXYGEN_VERSION}/bin/doxygen /usr/bin/doxygen
+cd -
 
 ######################################## PHP & PHPUnit
 if [[ "${LANG}" == "php" ]]; then
