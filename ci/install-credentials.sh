@@ -38,7 +38,6 @@
 set -e
 
 echo Installing credentials...
-exit 0
 
 if [ "${PUBLISH_DOCS}" == "ON" ]; then
     openssl aes-256-cbc -K $encrypted_f0ca52e75c0f_key -iv $encrypted_f0ca52e75c0f_iv \
