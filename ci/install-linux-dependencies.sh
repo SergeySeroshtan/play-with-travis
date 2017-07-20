@@ -66,6 +66,7 @@ elif [[ "${CC}" == "clang-3.6" ]]; then
 fi
 
 ######################################## CMake
+echo "Build & Install CMake ..."
 CMAKE_VERSION_MAJOR=3
 CMAKE_VERSION_MINOR=9
 CMAKE_VERSION_PATCH=0
@@ -78,6 +79,7 @@ make -j4 > /dev/null
 sudo make install > /dev/null
 
 ######################################## SWIG
+echo "Build & Install SWIG ..."
 SWIG_VERSION=3.0.12
 travis_retry wget http://downloads.sourceforge.net/swig/swig-${SWIG_VERSION}.tar.gz
 tar -xzf swig-${SWIG_VERSION}.tar.gz > /dev/null
@@ -87,12 +89,11 @@ make -j4  > /dev/null
 sudo make install > /dev/null
 
 ######################################## Doxygen
+echo "Build & Install Doxygen ..."
 DOXYGEN_VERSION=1.8.13
 travis_retry wget http://ftp.stack.nl/pub/users/dimitri/doxygen-${DOXYGEN_VERSION}.linux.bin.tar.gz
 tar -xzf doxygen-${DOXYGEN_VERSION}.linux.bin.tar.gz
-cd doxygen-${DOXYGEN_VERSION} > /dev/null
-./configure > /dev/null
-sudo make install > /dev/null
+sudo mv doxygen-${DOXYGEN_VERSION}/bin/doxygen /usr/bin > /dev/null
 
 ######################################## PHP & PHPUnit
 if [[ "${LANG}" == "php" ]]; then
@@ -105,6 +106,7 @@ if [[ "${LANG}" == "php" ]]; then
         PHPUNIT_VERSION=5.7
     fi
     ######################################## PHP
+    echo "Build & Install PHP ..."
     travis_retry sudo apt-add-repository ppa:ondrej/php
     travis_retry sudo apt-get -qq update
     travis_retry sudo apt-get install -y -qq php${PHP_VERSION}
@@ -112,6 +114,7 @@ if [[ "${LANG}" == "php" ]]; then
     travis_retry sudo apt-get install -y -qq php${PHP_VERSION}-mbstring
 
     ######################################## PHPUnit
+    echo "Build & Install PHPUnit ..."
     travis_retry wget https://phar.phpunit.de/phpunit-${PHPUNIT_VERSION}.phar
     chmod +x phpunit-${PHPUNIT_VERSION}.phar
     sudo mv phpunit-${PHPUNIT_VERSION}.phar /usr/bin/phpunit
