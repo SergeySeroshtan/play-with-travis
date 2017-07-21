@@ -60,9 +60,9 @@ travis_retry sudo apt-get install -y -qq software-properties-common
 #     travis_retry sudo apt-get -qq update
 #     travis_retry sudo apt-get install -y -qq gcc-6 g++-6
 if [[ "${CC}" == "clang-3.6" ]]; then
-    cat /etc/apt/sources.list
+    sudo cat /etc/apt/sources.list
     sudo echo "deb http://apt.llvm.org/trusty/ llvm-toolchain-trusty-3.6 main" >> /etc/apt/sources.list
-    cat /etc/apt/sources.list
+    sudo cat /etc/apt/sources.list
     travis_retry sudo apt-get -qq update
     travis_retry sudo apt-get install -y -qq clang-3.6 clang++-3.6
 fi
