@@ -27,6 +27,7 @@ install:
   - ${CC} --version
   - ${CXX} --version
   - echo "=========================================="
+  - echo $PATH
   - php --version
   - php-config
   - echo "=========================================="
