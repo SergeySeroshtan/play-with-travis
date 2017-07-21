@@ -50,56 +50,56 @@ travis_retry sudo apt-get -qq update
 ######################################## Utils
 travis_retry sudo apt-get install -y -qq software-properties-common
 
-######################################## Compilers
-if [[ "${CC}" == "gcc-5" ]]; then
-    travis_retry sudo apt-add-repository -y ppa:ubuntu-toolchain-r/test
-    travis_retry sudo apt-get -qq update
-    travis_retry sudo apt-get install -y -qq gcc-5 g++-5
-elif [[ "${CC}" == "gcc-6" ]]; then
-    travis_retry sudo apt-add-repository -y ppa:ubuntu-toolchain-r/test
-    travis_retry sudo apt-get -qq update
-    travis_retry sudo apt-get install -y -qq gcc-6 g++-6
-elif [[ "${CC}" == "clang-3.6" ]]; then
-    echo "deb http://apt.llvm.org/trusty/ llvm-toolchain-trusty-3.6 main" >> /etc/apt/sources.list
-    travis_retry sudo apt-get -qq update
-    travis_retry sudo apt-get install -y -qq clang-3.6 clang++-3.6
-fi
+# ######################################## Compilers
+# if [[ "${CC}" == "gcc-5" ]]; then
+#     travis_retry sudo apt-add-repository -y ppa:ubuntu-toolchain-r/test
+#     travis_retry sudo apt-get -qq update
+#     travis_retry sudo apt-get install -y -qq gcc-5 g++-5
+# elif [[ "${CC}" == "gcc-6" ]]; then
+#     travis_retry sudo apt-add-repository -y ppa:ubuntu-toolchain-r/test
+#     travis_retry sudo apt-get -qq update
+#     travis_retry sudo apt-get install -y -qq gcc-6 g++-6
+# elif [[ "${CC}" == "clang-3.6" ]]; then
+#     echo "deb http://apt.llvm.org/trusty/ llvm-toolchain-trusty-3.6 main" >> /etc/apt/sources.list
+#     travis_retry sudo apt-get -qq update
+#     travis_retry sudo apt-get install -y -qq clang-3.6 clang++-3.6
+# fi
 
-######################################## Build from the sources
-mkdir -p "dependencies" && cd "dependencies"
+# ######################################## Build from the sources
+# mkdir -p "dependencies" && cd "dependencies"
 
-######################################## CMake
-echo "Build & Install CMake ..."
-CMAKE_VERSION_MAJOR=3
-CMAKE_VERSION_MINOR=9
-CMAKE_VERSION_PATCH=0
-CMAKE_VERSION="${CMAKE_VERSION_MAJOR}.${CMAKE_VERSION_MINOR}.${CMAKE_VERSION_PATCH}"
-travis_retry wget https://cmake.org/files/v${CMAKE_VERSION_MAJOR}.${CMAKE_VERSION_MINOR}/cmake-${CMAKE_VERSION}.tar.gz
-tar xvfz cmake-${CMAKE_VERSION}.tar.gz
-cd cmake-${CMAKE_VERSION}
-./bootstrap
-make -j4
-sudo make install
-cd -
+# ######################################## CMake
+# echo "Build & Install CMake ..."
+# CMAKE_VERSION_MAJOR=3
+# CMAKE_VERSION_MINOR=9
+# CMAKE_VERSION_PATCH=0
+# CMAKE_VERSION="${CMAKE_VERSION_MAJOR}.${CMAKE_VERSION_MINOR}.${CMAKE_VERSION_PATCH}"
+# travis_retry wget https://cmake.org/files/v${CMAKE_VERSION_MAJOR}.${CMAKE_VERSION_MINOR}/cmake-${CMAKE_VERSION}.tar.gz
+# tar xvfz cmake-${CMAKE_VERSION}.tar.gz
+# cd cmake-${CMAKE_VERSION}
+# ./bootstrap
+# make -j4
+# sudo make install
+# cd -
 
-######################################## SWIG
-echo "Build & Install SWIG ..."
-SWIG_VERSION=3.0.12
-travis_retry wget http://downloads.sourceforge.net/swig/swig-${SWIG_VERSION}.tar.gz
-tar -xzf swig-${SWIG_VERSION}.tar.gz
-cd swig-${SWIG_VERSION}
-./configure
-make -j4
-sudo make install
-cd -
+# ######################################## SWIG
+# echo "Build & Install SWIG ..."
+# SWIG_VERSION=3.0.12
+# travis_retry wget http://downloads.sourceforge.net/swig/swig-${SWIG_VERSION}.tar.gz
+# tar -xzf swig-${SWIG_VERSION}.tar.gz
+# cd swig-${SWIG_VERSION}
+# ./configure
+# make -j4
+# sudo make install
+# cd -
 
-######################################## Doxygen
-echo "Build & Install Doxygen ..."
-DOXYGEN_VERSION=1.8.13
-travis_retry wget http://ftp.stack.nl/pub/users/dimitri/doxygen-${DOXYGEN_VERSION}.linux.bin.tar.gz
-tar -xzf doxygen-${DOXYGEN_VERSION}.linux.bin.tar.gz
-sudo mv doxygen-${DOXYGEN_VERSION}/bin/doxygen /usr/bin/doxygen
-cd -
+# ######################################## Doxygen
+# echo "Build & Install Doxygen ..."
+# DOXYGEN_VERSION=1.8.13
+# travis_retry wget http://ftp.stack.nl/pub/users/dimitri/doxygen-${DOXYGEN_VERSION}.linux.bin.tar.gz
+# tar -xzf doxygen-${DOXYGEN_VERSION}.linux.bin.tar.gz
+# sudo mv doxygen-${DOXYGEN_VERSION}/bin/doxygen /usr/bin/doxygen
+# cd -
 
 ####################################### PHP & PHPUnit
 if [[ "${LANG}" == "php" ]]; then
@@ -119,6 +119,11 @@ if [[ "${LANG}" == "php" ]]; then
     travis_retry sudo apt-get install -y -qq php${PHP_VERSION}-cli
     travis_retry sudo apt-get install -y -qq php${PHP_VERSION}-dev
     travis_retry sudo apt-get install -y -qq php${PHP_VERSION}-mbstring
+    sudo update-alternatives --set php /usr/bin/php${PHP_VERSION}
+    sudo update-alternatives --set php-config /usr/bin/php-config${PHP_VERSION}
+    sudo update-alternatives --set phpize /usr/bin/phpize${PHP_VERSION}
+    sudo update-alternatives --set phar /usr/bin/phar${PHP_VERSION}
+    sudo update-alternatives --set phar.phar /usr/bin/phar.phar${PHP_VERSION}
 
     ######################################## PHPUnit
     echo "Build & Install PHPUnit ..."

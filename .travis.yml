@@ -3,26 +3,6 @@ matrix:
   include:
     - os: linux
       compiler: gcc
-      env: LANG=cpp CC=gcc CXX=g++
-      sudo: required
-      dist: trusty
-    - os: linux
-      compiler: gcc
-      env: LANG=cpp CC=gcc-5 CXX=g++-5
-      sudo: required
-      dist: trusty
-    - os: linux
-      compiler: gcc
-      env: LANG=cpp CC=gcc-6 CXX=g++-6
-      sudo: required
-      dist: trusty
-    - os: linux
-      compiler: clang
-      env: LANG=cpp CC=clang-3.6 CXX=clang++-3.6
-      sudo: required
-      dist: trusty
-    - os: linux
-      compiler: gcc
       env: LANG=php LANG_VERSION=5.6
       sudo: required
       dist: trusty
@@ -37,23 +17,18 @@ matrix:
       sudo: required
       dist: trusty
 env:
-  global:
-    - BUILD_DIR_NAME=build
-    - DOC_BRANCH=master
-    - LIB_LOW_LEVEL_API=ON
     - PROJECT_ROOT=${TRAVIS_BUILD_DIR}
-    # COVERITY_SCAN_TOKEN
-    - secure: "GjN2rHGtPPXTMwWUzpB9ULqDrFXmShysGtQ8VIXYJULUUHZ26entYWuwTb8q3NI8syVeDFyCmam7PSnRgc/nuaOBh8/2lO+dAB1H54jfvbREBBYC2yIIZAT1z/oQ/ZYWdJBrWsNw+pPYk8lY1Z52ggLu2Gd4fktrzuISch7CuCY="
 before_install:
   - date -u
   - uname -a
   - if [[ "${TRAVIS_OS_NAME}" == "linux" ]]; then lscpu; fi
-install:
+install: echo install
   - cd "${TRAVIS_BUILD_DIR}"; if [[ "${TRAVIS_OS_NAME}" == "linux" ]]; then source ./ci/install-linux-dependencies.sh; fi
-  - cd "${TRAVIS_BUILD_DIR}"; source ./ci/install-credentials.sh
   - ${CC} --version
   - ${CXX} --version
-before_script: ./ci/configure.sh
-script: ./ci/run.sh
-after_success:
-  - source ./ci/publish-docs.sh
+  - echo "=========================================="
+  - php-config
+  - echo "=========================================="
+before_script: echo "Before script"
+script: echo "Script"
+after_success: echo "After success"
