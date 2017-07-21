@@ -28,6 +28,7 @@ install:
   - ${CXX} --version
   - echo "=========================================="
   - echo $PATH
+  - cat ~/.bash_profile
   - php --version
   - php-config
   - echo "=========================================="
