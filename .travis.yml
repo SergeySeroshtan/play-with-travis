@@ -29,6 +29,7 @@ install:
   - echo "=========================================="
   - echo $PATH
   - cat ~/.bash_profile
+  - ls -la $(which php)
   - php --version
   - php-config
   - echo "=========================================="
