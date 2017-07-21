@@ -23,6 +23,7 @@ before_install:
   - uname -a
   - if [[ "${TRAVIS_OS_NAME}" == "linux" ]]; then lscpu; fi
 install:
+  - export PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
   - cd "${TRAVIS_BUILD_DIR}"; if [[ "${TRAVIS_OS_NAME}" == "linux" ]]; then source ./ci/install-linux-dependencies.sh; fi
   - ${CC} --version
   - ${CXX} --version
