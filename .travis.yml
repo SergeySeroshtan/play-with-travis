@@ -2,6 +2,11 @@ language: cpp
 matrix:
   include:
     - os: linux
+      compiler: clang
+      env: LANG=cpp ALT_CC=clang-3.6 ALT_CXX=clang++-3.6
+      sudo: required
+      dist: trusty
+    - os: linux
       compiler: gcc
       env: LANG=php LANG_VERSION=5.6
       sudo: required
@@ -22,6 +27,9 @@ before_install:
   - date -u
   - uname -a
   - if [[ "${TRAVIS_OS_NAME}" == "linux" ]]; then lscpu; fi
+    # Travis overrides CC environment with compiler predefined values
+  - if [ -n "${ALT_CC}" ]; then export CC="${ALT_CC}"; fi
+  - if [ -n "${ALT_CXX}" ]; then export CXX="${ALT_CXX}"; fi
 install:
   - export PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
   - cd "${TRAVIS_BUILD_DIR}"; if [[ "${TRAVIS_OS_NAME}" == "linux" ]]; then source ./ci/install-linux-dependencies.sh; fi
