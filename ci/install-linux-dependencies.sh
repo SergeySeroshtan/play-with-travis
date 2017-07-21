@@ -103,9 +103,6 @@ travis_retry sudo apt-get install -y -qq software-properties-common
 
 ####################################### PHP & PHPUnit
 if [[ "${LANG}" == "php" ]]; then
-    sudo update-alternatives --list php
-    sudo update-alternatives --list php-config
-
     PHP_VERSION=${LANG_VERSION_MAJOR}.${LANG_VERSION_MINOR}
     PHP_VERSION_MAJOR=${LANG_VERSION_MAJOR}
 
