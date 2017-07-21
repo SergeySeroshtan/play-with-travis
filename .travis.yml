@@ -27,6 +27,7 @@ install:
   - ${CC} --version
   - ${CXX} --version
   - echo "=========================================="
+  - php --version
   - php-config
   - echo "=========================================="
 before_script: echo "Before script"
